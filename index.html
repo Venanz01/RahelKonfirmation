@@ -454,12 +454,12 @@
   <div style="padding:1.25rem; border-top:1px solid var(--border);">
     <p class="pv-eyebrow">Glückwünsche</p>
     <p class="pv-title" style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:4px;color:var(--text)">Schreib Rahel etwas ✉️</p>
-    <p class="section-sub">Deine Nachricht bleibt für immer.</p>
+    <p class="section-sub">WhatsApp öffnet sich mit deiner Nachricht — einfach abschicken!</p>
     <div id="preview-greetings-list"></div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">
       <input type="text" id="pg-name" class="text-field" placeholder="Dein Name" style="resize:none">
       <textarea class="text-field" id="pg-msg" rows="3" placeholder="Deine Nachricht an Rahel..."></textarea>
-      <button class="send-btn" onclick="sendGreetingPreview()">💌 Senden</button>
+      <button class="send-btn" onclick="sendGreetingPreview()">💚 Via WhatsApp an Rahel senden</button>
     </div>
   </div>
   <div class="footer"><em>Mit Liebe gemacht</em> · Konfirmation Rahel 2025</div>
@@ -628,6 +628,10 @@ function buildGreetings() {
     </div>
   `).join('');
 }
+function sendViaWhatsApp(name, msg) {
+  const text = encodeURIComponent(`💌 Glückwunsch von ${name}:\n\n${msg}\n\n🎉 Rahels Konfirmation 2025`);
+  window.open(`https://wa.me/41795496410?text=${text}`, '_blank');
+}
 function sendGreeting() {
   const name = document.getElementById('g-name').value.trim();
   const msg  = document.getElementById('g-msg').value.trim();
@@ -636,6 +640,7 @@ function sendGreeting() {
   document.getElementById('g-name').value = '';
   document.getElementById('g-msg').value = '';
   document.getElementById('greetings-list-edit').innerHTML = buildGreetings();
+  sendViaWhatsApp(name, msg);
 }
 function sendGreetingPreview() {
   const name = document.getElementById('pg-name').value.trim();
@@ -645,6 +650,7 @@ function sendGreetingPreview() {
   document.getElementById('pg-name').value = '';
   document.getElementById('pg-msg').value = '';
   document.getElementById('preview-greetings-list').innerHTML = buildGreetings();
+  sendViaWhatsApp(name, msg);
 }
 
 // ── PREVIEW ──
@@ -752,4 +758,3 @@ renderPreview();
 </script>
 </body>
 </html>
-
