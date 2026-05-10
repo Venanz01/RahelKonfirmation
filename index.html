@@ -481,7 +481,12 @@ const CHAPTERS = [
 let state = {
   mode: 'edit',
   active: 0,
-  chapters: CHAPTERS.map(c => ({ ...c, media: [], text: '', quiz: [] })),
+  chapters: CHAPTERS.map((c, i) => ({
+    ...c,
+    media: i === 0 ? [{ url: 'Screenshot_2026-05-10_at_20_28_22.png', type: 'image' }] : [],
+    text: '',
+    quiz: []
+  })),
   greetings: [],
   quizScores: {},
 };
