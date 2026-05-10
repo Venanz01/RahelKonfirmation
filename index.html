@@ -424,10 +424,21 @@
   </div>
 </div>
 
-<!-- MODE TOGGLE -->
-<div class="mode-bar">
-  <button class="mode-btn active" id="btn-edit" onclick="setMode('edit')">✏️ Bearbeiten</button>
-  <button class="mode-btn" id="btn-preview" onclick="setMode('preview')">▶ Vorschau</button>
+<!-- ADMIN BUTTON (subtle, bottom right) -->
+<div id="admin-bar" style="position:fixed;bottom:16px;right:16px;z-index:50;">
+  <button onclick="openAdminPw()" style="padding:8px 14px;border-radius:20px;border:1px solid var(--border-strong);background:var(--bg-card);font-size:12px;color:var(--text-light);cursor:pointer;font-family:'DM Sans',sans-serif;">⚙ Admin</button>
+</div>
+
+<!-- ADMIN PASSWORD OVERLAY -->
+<div id="admin-pw-screen" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(26,26,46,0.85);align-items:center;justify-content:center;flex-direction:column;padding:2rem;">
+  <div style="background:var(--bg-card);border-radius:16px;padding:2rem;width:100%;max-width:300px;text-align:center;">
+    <p style="font-size:16px;font-weight:500;color:var(--text);margin-bottom:6px;">Admin-Zugang</p>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;">Passwort für den Bearbeitungsmodus</p>
+    <input type="password" id="admin-pw-input" placeholder="Admin-Passwort" onkeydown="if(event.key==='Enter')checkAdminPw()" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border-strong);font-size:14px;font-family:'DM Sans',sans-serif;text-align:center;margin-bottom:10px;background:var(--bg);color:var(--text);outline:none;">
+    <button onclick="checkAdminPw()" style="width:100%;padding:12px;border-radius:10px;border:none;background:var(--purple);color:#fff;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;margin-bottom:8px;">Einloggen</button>
+    <button onclick="closeAdminPw()" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border-strong);background:transparent;font-size:13px;color:var(--text-muted);cursor:pointer;font-family:'DM Sans',sans-serif;">Abbrechen</button>
+    <div id="admin-pw-error" style="font-size:12px;color:#E24B4A;margin-top:8px;min-height:16px;"></div>
+  </div>
 </div>
 
 <!-- EDIT MODE -->
@@ -706,9 +717,39 @@ function checkPw() {
   }
 }
 
-// ── INIT ──
-renderNav();
-renderChapter();
+// ── ADMIN ──
+function openAdminPw() {
+  const el = document.getElementById('admin-pw-screen');
+  el.style.display = 'flex';
+  setTimeout(() => document.getElementById('admin-pw-input').focus(), 50);
+}
+function closeAdminPw() {
+  document.getElementById('admin-pw-screen').style.display = 'none';
+  document.getElementById('admin-pw-input').value = '';
+  document.getElementById('admin-pw-error').textContent = '';
+}
+function checkAdminPw() {
+  const val = document.getElementById('admin-pw-input').value;
+  if (val === 'RahelAdmin2010') {
+    closeAdminPw();
+    document.getElementById('edit-mode').classList.remove('hidden');
+    document.getElementById('preview-mode').classList.add('hidden');
+    document.getElementById('admin-bar').style.display = 'none';
+    state.mode = 'edit';
+    renderNav();
+    renderChapter();
+  } else {
+    document.getElementById('admin-pw-error').textContent = 'Falsches Passwort!';
+    document.getElementById('admin-pw-input').value = '';
+  }
+}
+
+// ── INIT — start in preview mode ──
+state.mode = 'preview';
+document.getElementById('edit-mode').classList.add('hidden');
+document.getElementById('preview-mode').classList.remove('hidden');
+renderPreview();
 </script>
 </body>
 </html>
+
