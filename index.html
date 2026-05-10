@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rahels Zeitreise ✝ Konfirmation 2025</title>
+<title>Rahels Zeitreise · Konfirmation 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -56,13 +56,36 @@
     background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.06) 0%, transparent 50%),
                       radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 50%);
   }
-  .hero-cross {
-    font-size: 2.5rem;
-    opacity: 0.9;
-    display: block;
-    margin-bottom: 0.75rem;
-    animation: fadeDown 0.8s ease both;
+  .hero-cross { display: none; }
+
+  #pw-screen {
+    position: fixed; inset: 0; z-index: 100;
+    background: linear-gradient(160deg, #26215C 0%, #534AB7 60%, #7F77DD 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2rem;
   }
+  #pw-screen h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: #fff; text-align: center; margin-bottom: 6px; }
+  #pw-screen h2 em { font-style: italic; color: #FAC775; }
+  #pw-screen p { font-size: 14px; color: rgba(255,255,255,0.65); margin-bottom: 2rem; text-align: center; }
+  #pw-input {
+    width: 100%; max-width: 280px; padding: 14px 18px;
+    border-radius: 12px; border: none;
+    font-size: 16px; font-family: 'DM Sans', sans-serif;
+    text-align: center; letter-spacing: 0.1em;
+    background: rgba(255,255,255,0.15); color: #fff;
+    outline: none; margin-bottom: 12px;
+  }
+  #pw-input::placeholder { color: rgba(255,255,255,0.45); letter-spacing: 0; }
+  #pw-input:focus { background: rgba(255,255,255,0.25); }
+  #pw-btn {
+    width: 100%; max-width: 280px; padding: 14px;
+    border-radius: 12px; border: none;
+    background: #FAC775; color: #412402;
+    font-size: 15px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: background 0.15s;
+  }
+  #pw-btn:hover { background: #EF9F27; }
+  #pw-error { font-size: 13px; color: #F09595; margin-top: 10px; min-height: 18px; }
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 8vw, 3rem);
@@ -380,6 +403,15 @@
 </head>
 <body>
 
+<!-- PASSWORD SCREEN -->
+<div id="pw-screen">
+  <h2>Rahels<br><em>Zeitreise</em></h2>
+  <p>Konfirmation 2025 · Nur für Gäste</p>
+  <input type="password" id="pw-input" placeholder="Passwort eingeben" onkeydown="if(event.key==='Enter')checkPw()">
+  <button id="pw-btn" onclick="checkPw()">Eintreten</button>
+  <div id="pw-error"></div>
+</div>
+
 <!-- HERO -->
 <div class="hero">
   <span class="hero-cross">✝</span>
@@ -662,6 +694,17 @@ window.resetQuiz = function(ci) {
   state.quizScores[ci] = 0;
   document.getElementById(`qplay-${ci}`).innerHTML = buildQuizPlay(ci, 0, false, -1);
 };
+
+// ── PASSWORD ──
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  if (val === 'Rahel2010') {
+    document.getElementById('pw-screen').style.display = 'none';
+  } else {
+    document.getElementById('pw-error').textContent = 'Falsches Passwort – versuch nochmal!';
+    document.getElementById('pw-input').value = '';
+  }
+}
 
 // ── INIT ──
 renderNav();
