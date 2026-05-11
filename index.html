@@ -392,7 +392,70 @@
   .pv-video { width: 100%; border-radius: 10px; margin-bottom: 8px; background: #000; }
   .pv-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 8px; }
 
-  /* ── FOOTER ── */
+  /* ── MEMORY GAME ── */
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .mem-card {
+    aspect-ratio: 1;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    perspective: 600px;
+    position: relative;
+  }
+  .mem-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+    border-radius: var(--radius-sm);
+  }
+  .mem-card.flipped .mem-inner { transform: rotateY(180deg); }
+  .mem-card.matched .mem-inner { transform: rotateY(180deg); }
+  .mem-card.matched .mem-front { border: 2px solid var(--teal); }
+  .mem-front, .mem-back {
+    position: absolute; inset: 0;
+    border-radius: var(--radius-sm);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+  }
+  .mem-back {
+    background: linear-gradient(135deg, var(--purple) 0%, #7F77DD 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.75rem;
+  }
+  .mem-front {
+    transform: rotateY(180deg);
+    background: var(--bg-card);
+  }
+  .mem-front img { width: 100%; height: 100%; object-fit: cover; }
+  .memory-stats {
+    display: flex; justify-content: space-between;
+    background: var(--bg-card); border-radius: var(--radius-sm);
+    padding: 10px 14px; margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    font-size: 14px; color: var(--text-muted);
+  }
+  .memory-stats span { font-weight: 500; color: var(--purple); }
+  .memory-win {
+    text-align: center; padding: 2rem 1rem;
+    background: var(--purple-light); border-radius: var(--radius);
+    margin-bottom: 1rem;
+  }
+  .memory-win .win-emoji { font-size: 3rem; display: block; margin-bottom: 8px; }
+  .memory-win h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--purple-dark); margin-bottom: 4px; }
+  .memory-win p { font-size: 14px; color: var(--text-muted); }
+  .memory-restart {
+    margin-top: 12px; padding: 11px 24px;
+    border-radius: var(--radius-sm); border: none;
+    background: var(--purple); color: #fff;
+    font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+  }
   .footer { text-align: center; padding: 2rem 1.5rem; font-size: 12px; color: var(--text-light); }
   .footer em { font-style: italic; font-family: 'Playfair Display', serif; }
 
@@ -476,6 +539,7 @@ const CHAPTERS = [
   { id:'hobbys',  label:'🎵 Hobbys',      years:'Leidenschaft', title:'Was Rahel liebt',   desc:'Talente und Interessen' },
   { id:'freunde', label:'🤝 Freunde',     years:'Für immer',  title:'Beste Freunde',       desc:'Die die zählen' },
   { id:'heute',   label:'🎉 Heute',       years:'2025',       title:'Der grosse Tag',      desc:'Konfirmation' },
+  { id:'memory',  label:'🃏 Memory',      years:'Spiel',      title:'Memory',              desc:'Finde alle Paare!' },
 ];
 
 let state = {
@@ -519,6 +583,24 @@ function renderChapter() {
   const i = state.active;
   const ch = state.chapters[i];
   const container = document.getElementById('chapters-container');
+
+  // Memory chapter
+  if (ch.id === 'memory') {
+    container.innerHTML = `
+      <div class="chapter active">
+        <div class="chapter-eyebrow">Spiel</div>
+        <h2 class="chapter-title">Memory</h2>
+        <p class="chapter-desc">Finde alle Paare von Rahels Fotos!</p>
+        <div id="memory-container"></div>
+        <div class="bottom-nav">
+          <button class="nav-arrow" onclick="setChapter(${i-1})">← Zurück</button>
+          <span class="chapter-counter">${i+1} / ${CHAPTERS.length}</span>
+          <button class="nav-arrow fwd" onclick="setChapter(${i+1})" disabled>Weiter →</button>
+        </div>
+      </div>`;
+    initMemory();
+    return;
+  }
   container.innerHTML = `
     <div class="chapter active" id="ch-${i}">
       <div class="chapter-eyebrow">${ch.years}</div>
@@ -715,6 +797,102 @@ window.nextQ = function(ci, qi) {
 window.resetQuiz = function(ci) {
   state.quizScores[ci] = 0;
   document.getElementById(`qplay-${ci}`).innerHTML = buildQuizPlay(ci, 0, false, -1);
+};
+
+// ── MEMORY GAME ──
+const MEMORY_PHOTOS = [
+  '1778517920856_image.png',
+  '1778517978640_image.png',
+  '1778518026606_image.png',
+  '1778518096958_image.png',
+  '1778518129996_image.png',
+];
+
+let memState = {
+  cards: [],
+  flipped: [],
+  matched: [],
+  moves: 0,
+  locked: false,
+  timer: 0,
+  timerInterval: null,
+};
+
+function initMemory() {
+  clearInterval(memState.timerInterval);
+  const pairs = [...MEMORY_PHOTOS, ...MEMORY_PHOTOS];
+  // shuffle
+  for (let i = pairs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pairs[i], pairs[j]] = [pairs[j], pairs[i]];
+  }
+  memState = { cards: pairs, flipped: [], matched: [], moves: 0, locked: false, timer: 0, timerInterval: null };
+  memState.timerInterval = setInterval(() => {
+    memState.timer++;
+    const el = document.getElementById('mem-timer');
+    if (el) el.textContent = memState.timer + 's';
+  }, 1000);
+  renderMemory();
+}
+
+function renderMemory() {
+  const container = document.getElementById('memory-container');
+  if (!container) return;
+  const won = memState.matched.length === memState.cards.length && memState.cards.length > 0;
+  if (won) {
+    clearInterval(memState.timerInterval);
+    container.innerHTML = `
+      <div class="memory-win">
+        <span class="win-emoji">🎉</span>
+        <h3>Gewonnen!</h3>
+        <p>${memState.moves} Züge · ${memState.timer} Sekunden</p>
+        <button class="memory-restart" onclick="initMemory()">↩ Nochmal spielen</button>
+      </div>`;
+    return;
+  }
+  const grid = memState.cards.map((photo, i) => {
+    const isFlipped = memState.flipped.includes(i) || memState.matched.includes(i);
+    const isMatched = memState.matched.includes(i);
+    return `<div class="mem-card${isFlipped ? ' flipped' : ''}${isMatched ? ' matched' : ''}" onclick="flipCard(${i})">
+      <div class="mem-inner">
+        <div class="mem-back">🌸</div>
+        <div class="mem-front"><img src="${photo}" alt="Rahel"></div>
+      </div>
+    </div>`;
+  }).join('');
+  container.innerHTML = `
+    <div class="memory-stats">
+      <div>Züge: <span id="mem-moves">${memState.moves}</span></div>
+      <div>Zeit: <span id="mem-timer">${memState.timer}s</span></div>
+      <div>Paare: <span>${memState.matched.length / 2}/${MEMORY_PHOTOS.length}</span></div>
+    </div>
+    <div class="memory-grid">${grid}</div>
+    <button class="memory-restart" onclick="initMemory()">↩ Neu starten</button>`;
+}
+
+window.flipCard = function(i) {
+  if (memState.locked) return;
+  if (memState.flipped.includes(i)) return;
+  if (memState.matched.includes(i)) return;
+  memState.flipped.push(i);
+  renderMemory();
+  if (memState.flipped.length === 2) {
+    memState.moves++;
+    memState.locked = true;
+    const [a, b] = memState.flipped;
+    if (memState.cards[a] === memState.cards[b]) {
+      memState.matched.push(a, b);
+      memState.flipped = [];
+      memState.locked = false;
+      renderMemory();
+    } else {
+      setTimeout(() => {
+        memState.flipped = [];
+        memState.locked = false;
+        renderMemory();
+      }, 1000);
+    }
+  }
 };
 
 // ── PASSWORD ──
