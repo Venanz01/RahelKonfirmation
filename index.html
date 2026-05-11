@@ -652,6 +652,7 @@ function renderChapter() {
       </div>`;
     initMemory();
     return;
+    }
    if (ch.id === 'bucket') {
     container.innerHTML = `
       <div class="chapter active">
@@ -682,9 +683,8 @@ function renderChapter() {
         </div>
       </div>`;
     return;
-  }
-  }
-
+    }
+ }
  
   container.innerHTML = `
     <div class="chapter active" id="ch-${i}">
