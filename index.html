@@ -749,7 +749,7 @@ function renderPreview() {
         <p class="pv-eyebrow">Spiel</p>
         <p class="pv-title">🃏 Memory</p>
         <p class="pv-text" style="margin-bottom:10px">Finde alle Paare von Rahels Fotos!</p>
-        <div id="memory-container"></div>
+        <div id="memory-container"><button class="qp-next-btn" onclick="initMemory()" style="width:100%;margin-top:8px">▶ Spiel starten</button></div>
       </div>`;
     }
     const imgs = ch.media.filter(m => m && m.type === 'image');
@@ -768,7 +768,10 @@ function renderPreview() {
   }).join('');
   document.getElementById('preview-greetings-list').innerHTML = buildGreetings();
   // init memory after DOM is ready
-  setTimeout(() => { if (document.getElementById('memory-container')) initMemory(); }, 50);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (document.getElementById('memory-container')) initMemory();
+  }));
+  setTimeout(() => { if (document.getElementById('memory-container') && !memState.cards.length) initMemory(); }, 300);
 }
 
 function buildQuizPlay(ci, qi, answered, selected) {
