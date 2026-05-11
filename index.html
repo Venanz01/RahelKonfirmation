@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rahels Zeitreise · Konfirmation 2025</title>
+<title>14.05.2025 · Konfirmation 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -557,6 +557,18 @@ let state = {
         { q: 'Was hat Rahel in ihrer Schülerarbeit gemacht?', opts: ['Kuchen-Rezeptbuch geschrieben', 'Ein Bild mit Aquarellfarben gemalt', 'Ein Pferdetagebuch verfasst', 'Eine Beauty-Kollektion kreiert'], correct: 1 },
         { q: 'Welche Musik hört Rahel am liebsten?', opts: ['Klassik beim Kochen', 'Schlager beim Reiten', 'Deutschrap — je derber, desto besser', 'Nur absolute Stille'], correct: 2 },
         { q: 'Was beschreibt Rahel am besten?', opts: ['Introvertiert und immer ruhig', 'Empathisch, sozial, emotional und kreativ', 'Pünktlich wie eine Schweizer Uhr', 'Gleichgültig gegenüber Tieren'], correct: 1 },
+       // Neue humorvolle Fragen
+        { q: 'Was hat Rahel mit Udo Jürgens gemeinsam?', 
+            opts: ['Sie kann hervorragend Klavier spielen', 'Sie war noch niemals in New York', 'Sie hat schon mehrmals den Grand Prix gewonnen', 'Beide lieben Schweizer Schokolade'], 
+           correct: 1 },
+
+        { q: 'Was haben viele Südkoreaner, Chinesen und Inder Rahel voraus?', 
+           opts: ['Sie sprechen drei Sprachen fließend', 'Sie waren schon auf dem Jungfraujoch', 'Sie können besser Ski fahren', 'Sie haben schon ein eigenes Auto'], 
+            correct: 1 },
+
+         { q: 'Wo war Rahel schon, aber noch nicht auf dem Jungfraujoch?', 
+           opts: ['Gantrisch', 'Matterhorn', 'Eiger', 'Pilatus'], 
+           correct: 0 }
       ]
     };
     return { ...c, media: i === 0 ? [{ url: 'Screenshot_2026-05-10_at_20_28_22.png', type: 'image' }] : [], text: '', quiz: [] };
