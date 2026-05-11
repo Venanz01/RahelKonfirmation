@@ -744,9 +744,17 @@ function sendGreetingPreview() {
 function renderPreview() {
   const pc = document.getElementById('preview-content');
   pc.innerHTML = state.chapters.map((ch, i) => {
+    if (ch.id === 'memory') {
+      return `<div class="pv-chapter">
+        <p class="pv-eyebrow">Spiel</p>
+        <p class="pv-title">🃏 Memory</p>
+        <p class="pv-text" style="margin-bottom:10px">Finde alle Paare von Rahels Fotos!</p>
+        <div id="memory-container"></div>
+      </div>`;
+    }
     const imgs = ch.media.filter(m => m && m.type === 'image');
     const vids = ch.media.filter(m => m && m.type === 'video');
-    const qs   = ch.quiz.filter(q => q.q && q.opts.some(o => o));
+    const qs   = (ch.quiz || []).filter(q => q.q && q.opts.some(o => o));
     return `
       <div class="pv-chapter">
         <p class="pv-eyebrow">${ch.years}</p>
@@ -759,6 +767,8 @@ function renderPreview() {
     `;
   }).join('');
   document.getElementById('preview-greetings-list').innerHTML = buildGreetings();
+  // init memory after DOM is ready
+  setTimeout(() => { if (document.getElementById('memory-container')) initMemory(); }, 50);
 }
 
 function buildQuizPlay(ci, qi, answered, selected) {
