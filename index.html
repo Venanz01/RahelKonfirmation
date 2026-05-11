@@ -462,6 +462,27 @@
   /* ── UTIL ── */
   .hidden { display: none !important; }
   .empty-hint { font-size: 12px; color: var(--text-light); margin-bottom: 8px; font-style: italic; }
+ 
+ /* Dein bisheriges CSS bleibt gleich – hier nur die Ergänzung für die Bucket List */
+ bucket-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.bucket-item {
+  background: #F8F5FF;
+  border-left: 4px solid var(--purple);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 0 8px 8px 0;
+}
+.bucket-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
 </style>
 </head>
 <body>
@@ -533,7 +554,7 @@
 <script>
 const CHAPTERS = [
   { id:'baby',    label:'👶 Baby',        years:'2009–2010', title:'Willkommen, Rahel!',    desc:'Die allerersten Monate' },
-  { id:'klein',   label:'🌱 Kleinkind',   years:'2011–2013', title:'Kleine Schritte',       desc:'Erste Worte, erste Abenteuer' },
+{ id:'bucket', label:'📋 Bucket List', years:'2025–2028', title:'Rahels Bucket List', desc:'Was soll Rahel bis 18 noch erleben?' }, // ← Ersetzt "Kleine Schritte"
   { id:'kiga',    label:'🎨 Kindergarten',years:'2014–2015', title:'Im Kindergarten',       desc:'Neue Freunde entdecken' },
   { id:'schule',  label:'📚 Schule',      years:'2016–2022', title:'Schulzeit',             desc:'Lernen, wachsen, lachen' },
   { id:'hobbys',  label:'🎵 Hobbys',      years:'Leidenschaft', title:'Was Rahel liebt',   desc:'Talente und Interessen' },
@@ -571,6 +592,15 @@ let state = {
              correct: 0 }
       ]
     };
+     if (c.id === 'bucket') {
+      return {
+        ...c,
+        suggestions: [
+          { name: "Mama", text: "Einmal im Leben auf dem Jungfraujoch sein", time: "14:22" },
+          { name: "Papa", text: "Mit dem eigenen Führerschein ans Meer fahren", time: "14:25" },
+        ]
+      };
+     }
     return { ...c, media: i === 0 ? [{ url: 'Screenshot_2026-05-10_at_20_28_22.png', type: 'image' }] : [], text: '', quiz: [] };
   }),
   greetings: [],
@@ -622,7 +652,40 @@ function renderChapter() {
       </div>`;
     initMemory();
     return;
+   if (ch.id === 'bucket') {
+    container.innerHTML = `
+      <div class="chapter active">
+        <div class="chapter-eyebrow">${ch.years}</div>
+        <h2 class="chapter-title">${ch.title}</h2>
+        <p class="chapter-desc">${ch.desc}</p>
+        
+        <div class="bucket-list" id="bucket-list">
+          ${ch.suggestions.map(s => `
+            <div class="bucket-item">
+              <strong>${s.name}</strong><br>
+              <span>${s.text}</span>
+              <small style="color:#999;display:block;margin-top:4px">${s.time}</small>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="bucket-form">
+          <input type="text" id="bucket-name" class="text-field" placeholder="Dein Name">
+          <textarea id="bucket-text" class="text-field" rows="3" placeholder="Was soll Rahel unbedingt noch machen? (z.B. Mit dem Pony ans Meer reiten, Solo-Interrail, eigenes Pferd...)"></textarea>
+          <button class="send-btn" onclick="addBucketSuggestion(${i})">💡 Vorschlag hinzufügen</button>
+        </div>
+
+        <div class="bottom-nav" style="margin-top:2rem">
+          <button class="nav-arrow" onclick="setChapter(${i-1})">← Zurück</button>
+          <span class="chapter-counter">${i+1} / ${CHAPTERS.length}</span>
+          <button class="nav-arrow fwd" onclick="setChapter(${i+1})">Weiter →</button>
+        </div>
+      </div>`;
+    return;
   }
+  }
+
+ 
   container.innerHTML = `
     <div class="chapter active" id="ch-${i}">
       <div class="chapter-eyebrow">${ch.years}</div>
@@ -967,7 +1030,29 @@ function checkAdminPw() {
     document.getElementById('admin-pw-input').value = '';
   }
 }
+window.addBucketSuggestion = function(i) {
+  const name = document.getElementById('bucket-name').value.trim();
+  const text = document.getElementById('bucket-text').value.trim();
+  
+  if (!name || !text) return alert("Name und Vorschlag ausfüllen!");
 
+  state.chapters[i].suggestions.push({
+    name: name,
+    text: text,
+    time: new Date().toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'})
+  });
+
+  document.getElementById('bucket-name').value = '';
+  document.getElementById('bucket-text').value = '';
+  renderChapter(); // aktualisiert die Liste
+};
+
+// Starte mit Preview-Modus (wie bisher)
+document.getElementById('edit-mode').classList.add('hidden');
+document.getElementById('preview-mode').classList.remove('hidden');
+</script>
+</body>
+</html>
 // ── INIT — start in preview mode ──
 state.mode = 'preview';
 document.getElementById('edit-mode').classList.add('hidden');
