@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>14.05.2025 · Konfirmation 2025</title>
+<title>Rahel Konfirmation 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -468,8 +468,11 @@
 
 <!-- PASSWORD SCREEN -->
 <div id="pw-screen">
-  <h2>Rahels<br><em>Zeitreise</em></h2>
-  <p>Konfirmation 2025 · Nur für Gäste</p>
+  <div style="width:90px;height:90px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.35);margin:0 auto 1rem;box-shadow:0 4px 16px rgba(0,0,0,0.3);">
+    <img src="1778611827564_image.png" alt="Rahel" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+  </div>
+  <h2>Rahel<br><em>Konfirmation</em></h2>
+  <p>2026 · Nur für Gäste</p>
   <input type="password" id="pw-input" placeholder="Passwort eingeben" onkeydown="if(event.key==='Enter')checkPw()">
   <button id="pw-btn" onclick="checkPw()">Eintreten</button>
   <div id="pw-error"></div>
@@ -478,8 +481,11 @@
 <!-- HERO -->
 <div class="hero">
   <span class="hero-cross">✝</span>
-  <h1>Rahels<br><em>Zeitreise</em></h1>
-  <p class="hero-sub">Konfirmation 2025</p>
+  <div style="width:110px;height:110px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.4);margin:0 auto 1rem;box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+    <img src="1778611827564_image.png" alt="Rahel" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+  </div>
+  <h1>Rahel<br><em>Konfirmation</em></h1>
+  <p class="hero-sub">2026</p>
   <div class="hero-waves">
     <svg viewBox="0 0 1200 60" preserveAspectRatio="none" fill="#FAF9F6">
       <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z"/>
@@ -532,14 +538,10 @@
 
 <script>
 const CHAPTERS = [
-  { id:'baby',    label:'👶 Baby',        years:'2009–2010', title:'Willkommen, Rahel!',    desc:'Die allerersten Monate' },
-  { id:'klein',   label:'🌱 Kleinkind',   years:'2011–2013', title:'Kleine Schritte',       desc:'Erste Worte, erste Abenteuer' },
-  { id:'kiga',    label:'🎨 Kindergarten',years:'2014–2015', title:'Im Kindergarten',       desc:'Neue Freunde entdecken' },
-  { id:'schule',  label:'📚 Schule',      years:'2016–2022', title:'Schulzeit',             desc:'Lernen, wachsen, lachen' },
-  { id:'hobbys',  label:'🎵 Hobbys',      years:'Leidenschaft', title:'Was Rahel liebt',   desc:'Talente und Interessen' },
-  { id:'freunde', label:'🤝 Freunde',     years:'Für immer',  title:'Beste Freunde',       desc:'Die die zählen' },
-  { id:'heute',   label:'🎉 Heute',       years:'2025',       title:'Der grosse Tag',      desc:'Konfirmation' },
+  { id:'hobbys',  label:'🎵 Was Rahel liebt', years:'Leidenschaft', title:'Was Rahel liebt',   desc:'Talente und Interessen' },
   { id:'memory',  label:'🃏 Memory',      years:'Spiel',      title:'Memory',              desc:'Finde alle Paare!' },
+  { id:'bucket',  label:'🪣 Bucket List', years:'bis 18',     title:'Bucket List',         desc:'Was muss Rahel noch erleben?' },
+  { id:'lieber',  label:'⚖️ Lieber…oder?', years:'Entscheid!', title:'Lieber… oder…?',     desc:'Kennst du Rahel wirklich?' },
 ];
 
 let state = {
@@ -557,21 +559,11 @@ let state = {
         { q: 'Was hat Rahel in ihrer Schülerarbeit gemacht?', opts: ['Kuchen-Rezeptbuch geschrieben', 'Ein Bild mit Aquarellfarben gemalt', 'Ein Pferdetagebuch verfasst', 'Eine Beauty-Kollektion kreiert'], correct: 1 },
         { q: 'Welche Musik hört Rahel am liebsten?', opts: ['Klassik beim Kochen', 'Schlager beim Reiten', 'Deutschrap — je derber, desto besser', 'Nur absolute Stille'], correct: 2 },
         { q: 'Was beschreibt Rahel am besten?', opts: ['Introvertiert und immer ruhig', 'Empathisch, sozial, emotional und kreativ', 'Pünktlich wie eine Schweizer Uhr', 'Gleichgültig gegenüber Tieren'], correct: 1 },
-       // Neue humorvolle Fragen
-        { q: 'Was hat Rahel mit Udo Jürgens gemeinsam?', 
-            opts: ['Sie kann hervorragend Klavier spielen', 'Sie war noch niemals in New York', 'Sie hat schon mehrmals den Grand Prix gewonnen', 'Beide lieben Schweizer Schokolade'], 
-           correct: 1 },
-
-        { q: 'Was haben viele Südkoreaner, Chinesen und Inder Rahel voraus?', 
-           opts: ['Sie sprechen drei Sprachen fließend', 'Sie waren schon auf dem Jungfraujoch', 'Sie können besser Ski fahren', 'Sie haben schon ein eigenes Auto'], 
-            correct: 1 },
-
-         { q: 'Wo war Rahel schon, aber noch nicht auf dem Jungfraujoch?', 
-           opts: ['Gantrisch', 'Matterhorn', 'Eiger', 'Pilatus'], 
-           correct: 0 }
+        { q: 'Was hat Rahel mit Udo Jürgens gemeinsam?', opts: ['Beide singen Schlager', 'Sie war noch niemals in New York', 'Beide lieben Pferde', 'Beide tragen weisse Bademäntel'], correct: 1 },
+        { q: 'Was haben viele Südkoreaner, Chinesen und Inder Rahel voraus?', opts: ['Bessere Smartphones', 'Sie waren schon auf dem Jungfraujoch — Rahel noch nicht!', 'Günstigere Flüge', 'Mehr Erfahrung mit Essstäbchen'], correct: 1 },
       ]
     };
-    return { ...c, media: i === 0 ? [{ url: 'Screenshot_2026-05-10_at_20_28_22.png', type: 'image' }] : [], text: '', quiz: [] };
+    return { ...c, media: [], text: '', quiz: [] };
   }),
   greetings: [],
   quizScores: {},
@@ -617,10 +609,54 @@ function renderChapter() {
         <div class="bottom-nav">
           <button class="nav-arrow" onclick="setChapter(${i-1})">← Zurück</button>
           <span class="chapter-counter">${i+1} / ${CHAPTERS.length}</span>
-          <button class="nav-arrow fwd" onclick="setChapter(${i+1})" disabled>Weiter →</button>
+          <button class="nav-arrow fwd" onclick="setChapter(${i+1})">Weiter →</button>
         </div>
       </div>`;
     initMemory();
+    return;
+  }
+
+  // Bucket list chapter
+  if (ch.id === 'bucket') {
+    container.innerHTML = `
+      <div class="chapter active">
+        <div class="chapter-eyebrow">bis 18</div>
+        <h2 class="chapter-title">🪣 Bucket List</h2>
+        <p class="chapter-desc">Was soll Rahel bis zu ihrem 18. Geburtstag noch erleben?</p>
+        <div style="background:var(--purple-light);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:1rem;font-size:13px;color:var(--text-muted);line-height:1.6;">
+          Rahel ist jetzt 15 — sie hat noch 3 Jahre Zeit! Schreib ihr einen Tipp, ein Abenteuer, einen Wunsch oder eine Challenge. Deine Idee landet direkt per WhatsApp bei ihr. 🚀
+        </div>
+        <div id="bucket-list-display" style="margin-bottom:1rem;">${buildBucketList()}</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <label class="field-label">Dein Name</label>
+          <input type="text" id="bucket-name" class="text-field" placeholder="z.B. Oma Heidi" style="resize:none">
+          <label class="field-label">Dein Bucket-List-Eintrag für Rahel</label>
+          <textarea class="text-field" id="bucket-item" rows="3" placeholder="z.B. Einmal auf dem Jungfraujoch übernachten! / New York besuchen! / Mit dem Zelt in den Bergen schlafen..."></textarea>
+          <button class="send-btn" onclick="sendBucketItem()" style="background:#534AB7;border-color:#534AB7;">🪣 Via WhatsApp an Rahel senden</button>
+        </div>
+        <div class="bottom-nav">
+          <button class="nav-arrow" onclick="setChapter(${i-1})">← Zurück</button>
+          <span class="chapter-counter">${i+1} / ${CHAPTERS.length}</span>
+          <button class="nav-arrow fwd" onclick="setChapter(${i+1})">Weiter →</button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Lieber oder chapter
+  if (ch.id === 'lieber') {
+    container.innerHTML = `
+      <div class="chapter active">
+        <div class="chapter-eyebrow">Entscheid!</div>
+        <h2 class="chapter-title">⚖️ Lieber… oder…?</h2>
+        <p class="chapter-desc">Kennst du Rahel wirklich? Wähle was SIE wählen würde!</p>
+        <div id="lieber-game">${buildLieberGame(0, false, -1)}</div>
+        <div class="bottom-nav">
+          <button class="nav-arrow" onclick="setChapter(${i-1})">← Zurück</button>
+          <span class="chapter-counter">${i+1} / ${CHAPTERS.length}</span>
+          <button class="nav-arrow fwd" disabled>Ende</button>
+        </div>
+      </div>`;
     return;
   }
   container.innerHTML = `
@@ -762,6 +798,112 @@ function sendGreetingPreview() {
   sendViaWhatsApp(name, msg);
 }
 
+function sendBucketPreview() {
+  const name = document.getElementById('pv-bucket-name').value.trim();
+  const item = document.getElementById('pv-bucket-item').value.trim();
+  if (!name || !item) return;
+  bucketItems.push({ name, item, time: new Date().toLocaleTimeString('de-CH', { hour:'2-digit', minute:'2-digit' }) });
+  document.getElementById('pv-bucket-name').value = '';
+  document.getElementById('pv-bucket-item').value = '';
+  const display = document.getElementById('bucket-list-preview');
+  if (display) display.innerHTML = buildBucketList();
+  const text = encodeURIComponent(`🪣 Bucket List Eintrag von ${name}:\n\n${item}\n\n✨ Schaffst du das bis zu deinem 18. Geburtstag, Rahel?`);
+  window.open(`https://wa.me/41795496410?text=${text}`, '_blank');
+}
+
+// ── LIEBER ODER ──
+const LIEBER = [
+  { a: 'Tesla', b: 'Porsche GT3', correct: 1, joker: 'Klar — der Tesla macht ihr schlecht! 🤢' },
+  { a: 'Los Angeles', b: 'New York', correct: 1, joker: 'New York — auch wenn sie noch nie dort war! 🗽' },
+  { a: 'Red Bull', b: 'El Tony', correct: 0, joker: 'Red Bull gibt Flügel — auch Rahel! 🐂' },
+  { a: 'Braun', b: 'Blond', correct: 1, joker: 'Blond — und das steht ihr super! 👱‍♀️' },
+  { a: 'WhatsApp', b: 'Snapchat', correct: 1, joker: 'Snapchat — Rahel ist immer auf dem neusten Stand! 👻' },
+  { a: 'Öl', b: 'Aquarell', correct: 1, joker: 'Aquarell — die Schülerarbeit lässt grüssen! 🎨' },
+  { a: 'Basketball', b: 'Korbball', correct: 0, joker: 'Basketball — Korbball ist ihr zu wenig cool 🏀' },
+  { a: 'Temu', b: 'Shein', correct: 1, joker: 'Shein — Fashion first! 👗' },
+  { a: 'Reis', b: 'Nudeln', correct: 1, joker: 'Nudeln — am liebsten selbst gekocht! 🍝' },
+  { a: 'Laugengipfeli', b: 'Buttergipfeli', correct: 0, joker: 'Laugengipfeli — die einzig wahre Wahl 🥐' },
+  { a: 'New Balance', b: 'Shoxs', correct: 1, joker: 'Shoxs — Stil über alles! 👟' },
+  { a: 'Apfel', b: 'Birne', correct: 0, joker: 'Apfel — knackig wie Rahel selbst 🍎' },
+  { a: 'Hecke schneiden', b: 'Rasenmähen', correct: 1, joker: 'Rasenmähen — das grosse Übel ist kleiner 😅' },
+  { a: 'WC putzen', b: 'Flaschen leeren', correct: 0, joker: 'WC putzen — lieber kurz und fertig als ewig schleppen!' },
+  { a: 'Wäsche waschen', b: 'Zimmer aufräumen', correct: 1, joker: 'Zimmer aufräumen — Wäsche waschen geht gar nicht 🧺' },
+  { a: 'Migros', b: 'Coop', correct: 1, joker: 'Coop — Rahel hat Niveau! 🛒' },
+  { a: 'Ski', b: 'Snowboard', correct: 0, joker: 'Ski — auf zwei Brettern durch den Schnee ⛷️' },
+  { a: 'Beatles', b: 'ABBA', correct: 1, joker: 'ABBA — Dancing Queen Rahel! 💃' },
+];
+
+let lieberState = { qi: 0, score: 0, answered: false };
+
+function buildLieberGame(qi, answered, selected) {
+  if (qi >= LIEBER.length) {
+    const pct = Math.round(lieberState.score / LIEBER.length * 100);
+    const msg = lieberState.score === LIEBER.length ? '💯 Perfekt! Du kennst Rahel in- und auswendig!' :
+                lieberState.score >= 14 ? '🏆 Fast perfekt — du kennst sie sehr gut!' :
+                lieberState.score >= 10 ? '👍 Solide! Ihr seid echte Freunde.' :
+                lieberState.score >= 6  ? '🤔 Hmm… kennst du Rahel wirklich?' :
+                '😅 Hast du Rahel heute zum ersten Mal getroffen?';
+    return `<div style="text-align:center;padding:1.5rem 0.5rem;background:var(--purple-light);border-radius:var(--radius-sm);">
+      <div style="font-size:3rem;font-weight:500;color:var(--purple);line-height:1">${lieberState.score}<span style="font-size:1.3rem;color:var(--text-muted)">/${LIEBER.length}</span></div>
+      <p style="font-size:14px;color:var(--text-muted);margin-top:6px;margin-bottom:1rem">${msg}</p>
+      <button class="nav-arrow fwd" onclick="lieberState={qi:0,score:0,answered:false};document.getElementById('lieber-game').innerHTML=buildLieberGame(0,false,-1)">↩ Nochmal spielen</button>
+    </div>`;
+  }
+  const q = LIEBER[qi];
+  const prog = LIEBER.map((_,i) => `<div style="flex:1;height:4px;border-radius:2px;background:${i<qi?'#534AB7':i===qi?'#AFA9EC':'var(--border-strong)'}"></div>`).join('');
+  const btnA = `<button onclick="answerLieber(0)"
+    style="flex:1;padding:16px 8px;border-radius:var(--radius-sm);border:1.5px solid ${answered?(0===q.correct?'#639922':0===selected?'#E24B4A':'var(--border-strong)'):'var(--border-strong)'};background:${answered?(0===q.correct?'#EAF3DE':0===selected?'#FCEBEB':'var(--bg-card)'):'var(--bg-card)'};font-size:14px;font-weight:500;color:${answered?(0===q.correct?'#27500A':0===selected?'#791F1F':'var(--text-primary)'):'var(--text-primary)'};cursor:pointer;font-family:var(--font-sans);transition:all 0.15s;"
+    ${answered?'disabled':''}>
+    ${answered && 0===q.correct ? '✓ ' : answered && 0===selected ? '✗ ' : ''}${q.a}
+  </button>`;
+  const btnB = `<button onclick="answerLieber(1)"
+    style="flex:1;padding:16px 8px;border-radius:var(--radius-sm);border:1.5px solid ${answered?(1===q.correct?'#639922':1===selected?'#E24B4A':'var(--border-strong)'):'var(--border-strong)'};background:${answered?(1===q.correct?'#EAF3DE':1===selected?'#FCEBEB':'var(--bg-card)'):'var(--bg-card)'};font-size:14px;font-weight:500;color:${answered?(1===q.correct?'#27500A':1===selected?'#791F1F':'var(--text-primary)'):'var(--text-primary)'};cursor:pointer;font-family:var(--font-sans);transition:all 0.15s;"
+    ${answered?'disabled':''}>
+    ${answered && 1===q.correct ? '✓ ' : answered && 1===selected ? '✗ ' : ''}${q.b}
+  </button>`;
+  const jokerHtml = answered ? `<div style="background:var(--purple-light);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--purple-dark);margin-top:10px;text-align:center">${q.joker}</div>` : '';
+  const nextHtml = answered ? `<button class="send-btn" style="margin-top:10px" onclick="lieberState.qi++;lieberState.answered=false;document.getElementById('lieber-game').innerHTML=buildLieberGame(lieberState.qi,false,-1)">${qi < LIEBER.length-1 ? 'Nächste Frage →' : 'Ergebnis anzeigen 🏆'}</button>` : '';
+  return `
+    <div style="display:flex;gap:4px;margin-bottom:14px">${prog}</div>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Frage ${qi+1} von ${LIEBER.length} · Was würde Rahel wählen?</p>
+    <p style="font-size:16px;font-weight:500;color:var(--text);margin-bottom:14px;text-align:center">Lieber… oder…?</p>
+    <div style="display:flex;gap:8px;margin-bottom:4px">${btnA}${btnB}</div>
+    ${jokerHtml}${nextHtml}`;
+}
+
+window.answerLieber = function(sel) {
+  if (lieberState.answered) return;
+  lieberState.answered = true;
+  if (sel === LIEBER[lieberState.qi].correct) lieberState.score++;
+  document.getElementById('lieber-game').innerHTML = buildLieberGame(lieberState.qi, true, sel);
+};
+
+// ── BUCKET LIST ──
+let bucketItems = [];
+
+function buildBucketList() {
+  if (!bucketItems.length) return '<p class="empty-hint">Noch keine Einträge — sei der Erste!</p>';
+  return bucketItems.map(b => `
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px;">
+      <div style="font-size:13px;font-weight:500;color:var(--purple-dark);">🪣 ${b.item}</div>
+      <div style="font-size:11px;color:var(--text-light);margin-top:3px;">von ${b.name} · ${b.time}</div>
+    </div>
+  `).join('');
+}
+
+function sendBucketItem() {
+  const name = document.getElementById('bucket-name').value.trim();
+  const item = document.getElementById('bucket-item').value.trim();
+  if (!name || !item) return;
+  bucketItems.push({ name, item, time: new Date().toLocaleTimeString('de-CH', { hour:'2-digit', minute:'2-digit' }) });
+  document.getElementById('bucket-name').value = '';
+  document.getElementById('bucket-item').value = '';
+  const display = document.getElementById('bucket-list-display');
+  if (display) display.innerHTML = buildBucketList();
+  const text = encodeURIComponent(`🪣 Bucket List Eintrag von ${name}:\n\n${item}\n\n✨ Schaffst du das bis zu deinem 18. Geburtstag, Rahel?`);
+  window.open(`https://wa.me/41795496410?text=${text}`, '_blank');
+}
+
 // ── PREVIEW ──
 function renderPreview() {
   const pc = document.getElementById('preview-content');
@@ -772,6 +914,28 @@ function renderPreview() {
         <p class="pv-title">🃏 Memory</p>
         <p class="pv-text" style="margin-bottom:10px">Finde alle Paare von Rahels Fotos!</p>
         <div id="memory-container"><button class="qp-next-btn" onclick="initMemory()" style="width:100%;margin-top:8px">▶ Spiel starten</button></div>
+      </div>`;
+    }
+    if (ch.id === 'bucket') {
+      return `<div class="pv-chapter">
+        <p class="pv-eyebrow">bis 18</p>
+        <p class="pv-title">🪣 Bucket List</p>
+        <p class="pv-text" style="margin-bottom:10px">Was soll Rahel bis zu ihrem 18. Geburtstag noch erleben? Schreib ihr einen Tipp, ein Abenteuer oder eine Challenge — direkt per WhatsApp!</p>
+        <div id="bucket-list-preview" style="margin-bottom:10px">${buildBucketList()}</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <input type="text" id="pv-bucket-name" class="text-field" placeholder="Dein Name" style="resize:none">
+          <textarea class="text-field" id="pv-bucket-item" rows="3" placeholder="z.B. Einmal auf dem Jungfraujoch! / New York besuchen! / Mit dem Zelt in den Bergen schlafen..."></textarea>
+          <button class="send-btn" onclick="sendBucketPreview()" style="background:#534AB7;border-color:#534AB7;">🪣 Via WhatsApp an Rahel senden</button>
+        </div>
+      </div>`;
+    }
+    if (ch.id === 'lieber') {
+      lieberState = { qi: 0, score: 0, answered: false };
+      return `<div class="pv-chapter">
+        <p class="pv-eyebrow">Entscheid!</p>
+        <p class="pv-title">⚖️ Lieber… oder…?</p>
+        <p class="pv-text" style="margin-bottom:12px">Kennst du Rahel wirklich? Wähle was SIE wählen würde!</p>
+        <div id="lieber-game">${buildLieberGame(0, false, -1)}</div>
       </div>`;
     }
     const imgs = ch.media.filter(m => m && m.type === 'image');
