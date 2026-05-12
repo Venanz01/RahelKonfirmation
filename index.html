@@ -551,16 +551,16 @@ let state = {
     if (c.id === 'hobbys') return {
       ...c,
       media: [],
-      text: 'Rahel liebt Pferde und Katzen, fährt Ski und reitet gerne. Sie kocht und bäckt experimentell und hat ein echtes Händchen dafür. Kreativ ist sie sowieso: Aquarellmalerei, Beauty und Deutschrap gehören genauso dazu wie Abende mit Kolleginnen. Ihr Gerechtigkeitssinn ist legendär, ihre Empathie für Menschen und Tiere riesig — und emotional; wir haben sie ganz fest gerne so wie sie ist!!!',
+      text: 'Rahel liebt Pferde und Katzen, fährt Ski und reitet gerne. Sie kocht und bäckt experimentell und hat ein echtes Händchen dafür. Kreativ ist sie sowieso: Acrylmalerei, Beauty und Deutschrap gehören genauso dazu wie Abende mit Kolleginnen. Ihr Gerechtigkeitssinn ist legendär, ihre Empathie für Menschen und Tiere riesig — und emotional; wir haben sie ganz fest gerne so wie sie ist!!!',
       quiz: [
         { q: 'Rahel liebt den Porsche GT3 — was passiert ihr aber im Tesla?', opts: ['Sie singt begeistert mit', 'Wird ihr übel von Beschleunigung und Kurven', 'Sie schläft sofort ein', 'Sie bestellt sich gleich einen'], correct: 1 },
         { q: 'Was geschah am 26. Dezember am Aussenreck?', opts: ['Bestes Weihnachtsgeschenk ever', 'Elle & Speiche gebrochen — Ambulanz ins Inselspital Bern', 'Erstes Skirennen gewonnen', 'Eine Katze adoptiert'], correct: 1 },
         { q: 'Welchen Beruf wird Rahel sicher NICHT ergreifen?', opts: ['Köchin', 'Reiterin', 'Ärztin / medizinischer Beruf', 'Künstlerin'], correct: 2 },
-        { q: 'Was hat Rahel in ihrer Schülerarbeit gemacht?', opts: ['Kuchen-Rezeptbuch geschrieben', 'Ein Bild mit Aquarellfarben gemalt', 'Ein Pferdetagebuch verfasst', 'Eine Beauty-Kollektion kreiert'], correct: 1 },
+        { q: 'Was hat Rahel in ihrer Schülerarbeit gemacht?', opts: ['Kuchen-Rezeptbuch geschrieben', 'Ein Bild mit Acrylfarben gemalt', 'Ein Pferdetagebuch verfasst', 'Eine Beauty-Kollektion kreiert'], correct: 1 },
         { q: 'Welche Musik hört Rahel am liebsten?', opts: ['Klassik beim Kochen', 'Schlager beim Reiten', 'Deutschrap — je derber, desto besser', 'Nur absolute Stille'], correct: 2 },
         { q: 'Was beschreibt Rahel am besten?', opts: ['Introvertiert und immer ruhig', 'Empathisch, sozial, emotional und kreativ', 'Pünktlich wie eine Schweizer Uhr', 'Gleichgültig gegenüber Tieren'], correct: 1 },
         { q: 'Was hat Rahel mit Udo Jürgens gemeinsam?', opts: ['Beide singen Schlager', 'Sie war noch niemals in New York', 'Beide lieben Pferde', 'Beide tragen weisse Bademäntel'], correct: 1 },
-        { q: 'Was haben viele Südkoreaner, Chinesen und Inder Rahel voraus?', opts: ['Bessere Smartphones', 'Sie waren schon auf dem Jungfraujoch — Rahel noch nicht!', 'Günstigere Flüge', 'Mehr Erfahrung mit Essstäbchen'], correct: 1 },
+        { q: 'Was haben viele SüdkoreanerInnen, ChinesInnen und InderInnen Rahel voraus?', opts: ['Bessere Smartphones', 'Sie waren schon auf dem Jungfraujoch — Rahel noch nicht!', 'Günstigere Flüge', 'Mehr Erfahrung mit Essstäbchen'], correct: 1 },
       ]
     };
     return { ...c, media: [], text: '', quiz: [] };
@@ -813,12 +813,12 @@ function sendBucketPreview() {
 
 // ── LIEBER ODER ──
 const LIEBER = [
-  { a: 'Tesla', b: 'Porsche GT3', correct: 1, joker: 'Klar — der Tesla macht ihr schlecht! 🤢' },
+  { a: 'Lamborghini', b: 'Porsche GT3', correct: 1, joker: 'Klar — Deutsche Qualitätsarbeit! 🤢' },
   { a: 'Los Angeles', b: 'New York', correct: 1, joker: 'New York — auch wenn sie noch nie dort war! 🗽' },
   { a: 'Red Bull', b: 'El Tony', correct: 0, joker: 'Red Bull gibt Flügel — auch Rahel! 🐂' },
   { a: 'Braun', b: 'Blond', correct: 1, joker: 'Blond — und das steht ihr super! 👱‍♀️' },
   { a: 'WhatsApp', b: 'Snapchat', correct: 1, joker: 'Snapchat — Rahel ist immer auf dem neusten Stand! 👻' },
-  { a: 'Öl', b: 'Aquarell', correct: 1, joker: 'Aquarell — die Schülerarbeit lässt grüssen! 🎨' },
+  { a: 'Öl', b: 'Acryl', correct: 1, joker: 'Acryl — die Schülerarbeit lässt grüssen! 🎨' },
   { a: 'Basketball', b: 'Korbball', correct: 0, joker: 'Basketball — Korbball ist ihr zu wenig cool 🏀' },
   { a: 'Temu', b: 'Shein', correct: 1, joker: 'Shein — Fashion first! 👗' },
   { a: 'Reis', b: 'Nudeln', correct: 1, joker: 'Nudeln — am liebsten selbst gekocht! 🍝' },
